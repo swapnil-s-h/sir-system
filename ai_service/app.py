@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 from ultralytics import YOLO
 import cv2
 import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
@@ -12,9 +14,9 @@ MODEL_PATH = os.path.join('runs', 'detect', 'forbes_defect_model2', 'weights', '
 
 try:
     model = YOLO(MODEL_PATH)
-    print(f"✅ Loaded Custom Model: {MODEL_PATH}")
+    print(f"Loaded Custom Model: {MODEL_PATH}")
 except:
-    print("⚠️ Custom model not found, loading generic YOLOv8n")
+    print("Custom model not found, loading generic YOLOv8n")
     model = YOLO('yolov8n.pt')
 
 # --- HELPER: OPENCV RUST DETECTION ---
@@ -28,6 +30,64 @@ def detect_rust_opencv(image_path):
     mask = cv2.inRange(hsv, lower_rust, upper_rust)
     percentage = (cv2.countNonZero(mask) / (img.shape[0] * img.shape[1])) * 100
     return round(percentage, 2)
+
+# --- CHATBOT WITH RAG ---
+
+def load_knowledge_base():
+    file_path = os.path.join(os.path.dirname(__file__), 'sir.txt')
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            text = f.read()
+        
+        # Split text into chunks/sentences for better search
+        # We split by newlines to keep list items separate
+        raw_lines = text.split('\n')
+        
+        # Filter out empty lines or headers like [SECTION...]
+        clean_lines = [line.strip() for line in raw_lines if line.strip() and not line.startswith('[')]
+        return clean_lines
+    except Exception as e:
+        print(f"Error loading sir.txt: {e}")
+        return ["Error loading knowledge base."]
+
+# Load it once when the app starts
+knowledge_base = load_knowledge_base()
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.json
+    user_query = data.get('query', '').lower()
+    
+    if not user_query:
+        return jsonify({"answer": "Please ask a question."})
+
+    try:
+        # Simple RAG Logic: Find the most similar sentence in knowledge_base
+        # 1. Add user query to the corpus to compare
+        documents = knowledge_base + [user_query]
+        
+        # 2. Vectorize (Convert text to numbers)
+        tfidf_vectorizer = TfidfVectorizer()
+        tfidf_matrix = tfidf_vectorizer.fit_transform(documents)
+        
+        # 3. Calculate Cosine Similarity (Last item is the query)
+        cosine_similarities = cosine_similarity(tfidf_matrix[-1], tfidf_matrix[:-1])
+        
+        # 4. Get best match
+        best_match_idx = cosine_similarities.argsort()[0][-1]
+        best_score = cosine_similarities[0, best_match_idx]
+        
+        # Threshold: If similarity is too low, say "I don't know"
+        if best_score < 0.1:
+            return jsonify({
+                "answer": "I am not sure about that. Please refer to the official SIR manual or ask a Manager."
+            })
+            
+        return jsonify({"answer": knowledge_base[best_match_idx]})
+
+    except Exception as e:
+        print(f"Chat Error: {e}")
+        return jsonify({"answer": "Sorry, my brain is offline right now."})
 
 # --- MAIN ANALYSIS FUNCTION ---
 def analyze_image(image_path):

@@ -1,0 +1,83 @@
+[SECTION: COMPANY_PROFILE]
+Company: Forbes Marshall
+Domain: Energy Conservation, Process Efficiency, and Steam Engineering.
+Key Products: Industrial Boilers, Steam Systems, Control Valves, Flow Meters, Emission Monitoring Systems.
+Services: Energy Audits, Asset Management, Vibration Consultancy.
+Core Philosophy: "Energising Businesses" by optimizing steam and process control systems.
+
+[SECTION: BOILER_MAINTENANCE_SCHEDULE]
+Source: Forbes Marshall Boiler House Maintenance Guidelines
+Frequency: DAILY_CHECKS
+1. Check water level in the gauge glass; verify it is clear and moving freely.
+2. Perform 'Blowdown' of the boiler to remove sludge and sediment (bottom blowdown).
+3. Check feed water tank level and temperature (ideal temp: 85°C - 95°C for deaeration).
+4. Monitor Flue Gas Temperature (FGT). A rise in FGT indicates scaling on tubes.
+5. Check fuel oil pressure and temperature (for oil-fired boilers).
+6. Verify operation of the feed water pump; check for abnormal noise or vibration.
+7. Inspect the burner flame for stability and correct color (bright orange/yellow for oil, blue for gas).
+
+Frequency: WEEKLY_CHECKS
+1. Test the Low Water Cut-off (LWCO) device to ensure the burner trips when water is low.
+2. Check the operation of the Mobrey Level Controller.
+3. Inspect and clean the fuel oil filters and strainers.
+4. Check tension of V-belts on the blower/fan motors.
+5. Lubricate bearings of pumps and motors if required.
+6. Verify the chemical dosing system is functioning (check tank level and pump stroke).
+
+Frequency: MONTHLY_CHECKS
+1. Clean the smoke tubes (fire tubes) to remove soot deposits (soot acts as an insulator).
+2. Inspect the refractory lining of the furnace door for cracks or damage.
+3. Check and clean the electrode tips of the ignition system.
+4. Clean the photo-sensor (flame scanner) lens.
+5. Inspect all steam traps in the boiler house for correct operation (no steam blowing).
+
+Frequency: ANNUAL_CHECKS (SHUTDOWN)
+1. Complete descaling of the boiler (water side) using inhibited acid.
+2. Hydraulic Pressure Test (Hydro Test) at 1.5 times the working pressure (as per IBR/ASME).
+3. Calibration of all pressure gauges and temperature sensors.
+4. Overhaul of all mountings: Main Steam Stop Valve, Safety Valves, Feed Check Valves.
+5. NDT (Non-Destructive Testing) of weld joints if required by regulation.
+
+[SECTION: CONTROL_VALVE_MAINTENANCE]
+Source: Forbes Marshall Control Valve Asset Management
+Type: Pneumatic Diaphragm Control Valves / Piston Valves
+
+Frequency: PREVENTIVE_MAINTENANCE
+1. Air Filter Regulator (AFR): Drain moisture daily. Clean the sintered filter cartridge monthly.
+2. Gland Packing: Check for stem leakage. Tighten gland nuts evenly. If leak persists, replace Graphoil/PTFE packing.
+3. Actuator Diaphragm: Inspect for air leaks (hissing sound) around the casing. Replace rubber diaphragm every 2 years.
+4. Valve Positioner: Check for 'hunting' (oscillation). Calibrate Zero (4mA) and Span (20mA).
+5. Stem Connector: Ensure the lock-nut connecting the actuator stem and valve stem is tight.
+
+[SECTION: INDUSTRY_STANDARDS_AND_TESTING]
+Standard: ASME Section I (Power Boilers) & Section VII (Care of Power Boilers)
+- Safety Valve Setting: The lifting pressure must not exceed the MAWP (Maximum Allowable Working Pressure) by more than 6% (or as defined by local code).
+- Water Quality Limits (Typical for Shell Boilers up to 20 Bar):
+  - pH: 10.5 - 12.0
+  - Total Dissolved Solids (TDS): Max 3500 ppm
+  - Hardness: < 5 ppm (ideally zero)
+  - Dissolved Oxygen: < 0.05 ppm
+
+Standard: API 598 (Valve Inspection and Testing)
+- Shell Test: Pressure test of the valve body at 1.5x rated pressure. No visible leakage allowed.
+- Seat Leakage Test (Closure Test):
+  - Test Pressure: 1.1x rated pressure.
+  - Allowable Leakage for Metal Seated Valves: Small amount of bubbles/drops allowed (e.g., 0.1 ml/min per inch of size).
+  - Allowable Leakage for Soft Seated Valves: Zero leakage (Bubble-tight).
+
+[SECTION: TROUBLESHOOTING_GUIDE]
+Problem: "Boiler water level unstable"
+Possible Cause: Foaming due to high TDS or oil in water.
+Action: Check TDS level, perform blowdown, check feed water quality.
+
+Problem: "Burner fails to fire"
+Possible Cause: No fuel, photocell dirty, electrode gap incorrect, blower trip.
+Action: Check fuel tank, clean scanner, reset burner controller.
+
+Problem: "Control valve hunting (fluctuating)"
+Possible Cause: Loose gland packing, positioner calibration error, sticking stem.
+Action: Tighten packing, auto-calibrate positioner, check air supply pressure (should be stable, typically 2-4 bar).
+
+Problem: "Steam Trap blowing live steam"
+Possible Cause: Worn out internals, dirt in seat.
+Action: Clean strainer, replace trap internals (kit).

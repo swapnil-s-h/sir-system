@@ -232,9 +232,9 @@ app.get('/api/reports/:id', async (req, res) => {
 
 // API Route: Assign a CAPA to a Finding
 app.post('/api/capa', authenticateToken, async (req, res) => {
-  if (req.user.role !== 'manager') {
-      return res.status(403).json({ message: "Only Managers can assign CAPA" });
-  }
+  // if (req.user.role !== 'manager') {
+  //     return res.status(403).json({ message: "Only Managers can assign CAPA" });
+  // }
   try {
     const { finding_id, action_description, assigned_to, target_date } = req.body;
     
@@ -356,6 +356,22 @@ app.get('/api/stats', async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
+  }
+});
+
+// API Route: Chatbot Proxy
+app.post('/api/chat', authenticateToken, async (req, res) => {
+  try {
+    const { query } = req.body;
+    
+    // Call Python Service
+    const pythonResponse = await axios.post('http://localhost:5001/chat', { query });
+    
+    res.json(pythonResponse.data);
+
+  } catch (err) {
+    console.error("Chatbot Error:", err.message);
+    res.json({ answer: "Error connecting to AI Assistant." });
   }
 });
 

@@ -123,6 +123,7 @@ const pool = new Pool({
 
 module.exports = pool;
 ```
+
 ## 5. Run the Backend Server
 Inside the /server folder:
 ```bash
@@ -130,7 +131,41 @@ npm install
 npm start
 ```
 
-## 6. Run the React Client
+## 6. Run the AI Service
+Open a new terminal and navigate to the AI service directory:
+```bash
+cd ai_service
+```
+
+Create a virtual environment:
+```bash
+# On Windows
+python -m venv venv
+
+# On macOS/Linux
+python3 -m venv venv
+```
+
+Activate the virtual environment:
+```bash
+# On Windows
+venv\Scripts\activate
+
+# On macOS/Linux
+source venv/bin/activate
+```
+
+Install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Run the AI service:
+```bash
+python app.py
+```
+
+## 7. Run the React Client
 Inside the /client folder:
 ```bash
 npm install
